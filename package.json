@@ -3,6 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
+  "author": "vyntrix",
+  "license": "MIT",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
