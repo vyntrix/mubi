@@ -13,6 +13,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     signIn: '/login',
     newUser: '/register',
     signOut: '/settings',
+    verifyRequest: '/verify',
   },
   providers: [
     Nodemailer({

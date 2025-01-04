@@ -2,13 +2,27 @@
   import { signIn } from "@auth/sveltekit/client";
 
   let email = $state('')
+  let loading = $state(false)
+
+  async function send_email(event: SubmitEvent) {
+    event.preventDefault()
+    loading = true
+    await signIn('nodemailer', { email, redirect: false })
+    loading = false
+  }
 </script>
 
 <div class="max-w-xs mx-auto w-full vpack gap-4">
-    <div class="w-full vbox gap-4">
-        <input bind:value={email} aria-label="Email input" type="email" placeholder="Email" class="input w-full" />
-        <button onclick={() => signIn('nodemailer', { email })} aria-label="Send magic link" class="btn">Send magic link</button>
-    </div>
+    <form class="w-full vbox gap-4" onsubmit={(e) => send_email(e)}>
+        <input required bind:value={email} name="email" aria-label="Email input" type="email" placeholder="Email" class="input w-full" />
+        <button aria-label="Send magic link" class="btn">
+            {#if loading}
+                <div class="i-mingcute-loading-fill animate-spin text-xl"></div>
+            {:else}
+                Send magic link
+            {/if}
+        </button>
+    </form>
     <div class="hbox gap-2 text-center w-full">
         <div class="h-px w-full bg-dark-4/50 my-2"></div>
         <span class="text-sm opacity-50 font-bold">or</span>
