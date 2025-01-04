@@ -5,6 +5,7 @@ import { SvelteKitAuth } from '@auth/sveltekit'
 import Discord from '@auth/sveltekit/providers/discord'
 import Google from '@auth/sveltekit/providers/google'
 import Nodemailer from '@auth/sveltekit/providers/nodemailer'
+import { createTransport } from 'nodemailer'
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
   adapter: PrismaAdapter(prisma),
@@ -17,13 +18,30 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     Nodemailer({
       server: {
         host: env.SMTP_HOST,
-        port: env.SMTP_PORT,
+        // TODO: fix this any type
+        port: env.SMTP_PORT as any,
         auth: {
           user: env.SMTP_USER,
           pass: env.SMTP_PASSWORD,
         },
       },
       from: env.EMAIL_FROM,
+      async sendVerificationRequest(params) {
+        const { identifier, url, provider, theme } = params
+        const { host } = new URL(url)
+
+        const transport = createTransport(provider.server)
+        const result = await transport.sendMail({
+          to: identifier,
+          from: provider.from,
+          subject: `Sign in to ${host}`,
+          text: text({ url, host }),
+        })
+        const failed = result.rejected.concat(result.pending).filter(Boolean)
+        if (failed.length) {
+          throw new Error(`Email(s) (${failed.join(', ')}) could not be sent`)
+        }
+      },
     }),
     Discord({
       clientId: env.DISCORD_CLIENT_ID,
@@ -35,3 +53,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     }),
   ],
 })
+
+function text({ url, host }: { url: string, host: string }) {
+  return `Sign in to ${host}\n${url}\n\n`
+}
