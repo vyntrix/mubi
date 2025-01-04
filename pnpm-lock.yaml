@@ -10,13 +10,16 @@ importers:
     dependencies:
       '@auth/prisma-adapter':
         specifier: ^2.7.4
-        version: 2.7.4(@prisma/client@6.1.0(prisma@6.1.0))
+        version: 2.7.4(@prisma/client@6.1.0(prisma@6.1.0))(nodemailer@6.9.16)
       '@auth/sveltekit':
         specifier: ^1.7.4
-        version: 1.7.4(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.16.1)(vite@5.4.11))(svelte@5.16.1)(vite@5.4.11))(svelte@5.16.1)
+        version: 1.7.4(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.16.1)(vite@5.4.11))(svelte@5.16.1)(vite@5.4.11))(nodemailer@6.9.16)(svelte@5.16.1)
       '@prisma/client':
         specifier: ^6.1.0
         version: 6.1.0(prisma@6.1.0)
+      nodemailer:
+        specifier: ^6.9.16
+        version: 6.9.16
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^3.12.1
@@ -1943,6 +1946,10 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
+  nodemailer@6.9.16:
+    resolution: {integrity: sha512-psAuZdTIRN08HKVd/E8ObdV6NO7NTBY3KsC30F7M4H1OnmLCUNaS56FpYxyb26zWLSyYF9Ozch9KYHhHegsiOQ==}
+    engines: {node: '>=6.0.0'}
+
   normalize-package-data@2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
 
@@ -2561,29 +2568,33 @@ snapshots:
 
   '@antfu/utils@0.7.10': {}
 
-  '@auth/core@0.37.4':
+  '@auth/core@0.37.4(nodemailer@6.9.16)':
     dependencies:
       '@panva/hkdf': 1.2.1
       jose: 5.9.6
       oauth4webapi: 3.1.4
       preact: 10.24.3
       preact-render-to-string: 6.5.11(preact@10.24.3)
+    optionalDependencies:
+      nodemailer: 6.9.16
 
-  '@auth/prisma-adapter@2.7.4(@prisma/client@6.1.0(prisma@6.1.0))':
+  '@auth/prisma-adapter@2.7.4(@prisma/client@6.1.0(prisma@6.1.0))(nodemailer@6.9.16)':
     dependencies:
-      '@auth/core': 0.37.4
+      '@auth/core': 0.37.4(nodemailer@6.9.16)
       '@prisma/client': 6.1.0(prisma@6.1.0)
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
       - '@simplewebauthn/server'
       - nodemailer
 
-  '@auth/sveltekit@1.7.4(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.16.1)(vite@5.4.11))(svelte@5.16.1)(vite@5.4.11))(svelte@5.16.1)':
+  '@auth/sveltekit@1.7.4(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.16.1)(vite@5.4.11))(svelte@5.16.1)(vite@5.4.11))(nodemailer@6.9.16)(svelte@5.16.1)':
     dependencies:
-      '@auth/core': 0.37.4
+      '@auth/core': 0.37.4(nodemailer@6.9.16)
       '@sveltejs/kit': 2.15.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.16.1)(vite@5.4.11))(svelte@5.16.1)(vite@5.4.11)
       set-cookie-parser: 2.7.1
       svelte: 5.16.1
+    optionalDependencies:
+      nodemailer: 6.9.16
 
   '@babel/code-frame@7.26.2':
     dependencies:
@@ -4565,6 +4576,8 @@ snapshots:
   node-fetch-native@1.6.4: {}
 
   node-releases@2.0.19: {}
+
+  nodemailer@6.9.16: {}
 
   normalize-package-data@2.5.0:
     dependencies:
