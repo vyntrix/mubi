@@ -7,7 +7,7 @@
 <div class="max-w-xs mx-auto w-full vpack gap-4">
     <div class="w-full vbox gap-4">
         <input bind:value={email} aria-label="Email input" type="email" placeholder="Email" class="input w-full" />
-        <button onclick={() => signIn('email', { email })} aria-label="Send magic link" class="btn">Send magic link</button>
+        <button onclick={() => signIn('nodemailer', { email })} aria-label="Send magic link" class="btn">Send magic link</button>
     </div>
     <div class="hbox gap-2 text-center w-full">
         <div class="h-px w-full bg-dark-4/50 my-2"></div>
