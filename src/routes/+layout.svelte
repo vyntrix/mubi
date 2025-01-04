@@ -4,8 +4,14 @@
   import Header from '$lib/components/header.svelte';
   import Footer from '$lib/components/footer.svelte';
 
+  import * as config from '$lib/config'
+
   let { children } = $props()
 </script>
+
+<svelte:head>
+    <title>{config.APP_NAME}</title>
+</svelte:head>
 
 <div class="max-w-4xl mx-auto min-h-screen layout">
     <Header />
