@@ -9,6 +9,14 @@ import { createTransport } from 'nodemailer'
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    session: async ({ session, user }) => {
+      if (session?.user) {
+        session.user.id = user.id
+      }
+      return session
+    },
+  },
   pages: {
     signIn: '/login',
     newUser: '/register',
