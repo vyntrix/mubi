@@ -9,7 +9,17 @@ export const load: PageServerLoad = async (event) => {
 
   const writtenTodayCheck = await hasWrittenToday(session?.user?.id)
 
+  const lastEntries = await prisma.entry.findMany({
+    where: { userId: session?.user?.id },
+    orderBy: { createdAt: 'desc' },
+    take: 4,
+  })
+
   if (!writtenTodayCheck && params.get('later') !== 'true') {
     return redirect(307, '/new-entry')
+  }
+
+  return {
+    lastEntries,
   }
 }
