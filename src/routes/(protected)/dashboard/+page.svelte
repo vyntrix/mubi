@@ -10,27 +10,36 @@
         <h2 class="text-2xl font-bold">Your last entries</h2>
     </div>
     <div class="h-px w-full bg-dark-4/50"></div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
-        <div class="absolute w-full h-full fadeout"></div>
-        {#if data.lastEntries}
+    {#if data.lastEntries && data.lastEntries.length > 0}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
+            <div class="absolute w-full h-full fadeout"></div>
             {#each data.lastEntries as entry}
-                <div class="card">
+                <div class="card justify-between items-start text-left">
                     <h3 class="text-lg font-bold">{formatDate(entry.createdAt.toDateString())}</h3>
                     <p>{entry.body}</p>
+                    <p class="font-bold font-dark/50">
+                        You were feeling <span class="underline decoration-wavy underline-yellow">{entry.mood}</span>
+                    </p>
                 </div>
             {/each}
-        {/if}
-    </div>
-    <div class="pack mt-8">
-        <a href="/entries" class="text-dark/50 hover:underline">
-            See all entries
-        </a>
-    </div>
+        </div>
+        <div class="pack mt-8">
+            <a href="/entries" class="text-dark/50 hover:underline">
+                See all entries
+            </a>
+        </div>
+    {:else}
+        <div class="pack w-full mt-8">
+            <p class="text-dark/50">
+                You don't have any entries yet.
+            </p>
+        </div>
+    {/if}
 </section>
 
 <style>
     .fadeout {
-        background: linear-gradient(transparent, white);
+        background: linear-gradient(transparent 70%, white);
         pointer-events: none;
     }
 </style>
