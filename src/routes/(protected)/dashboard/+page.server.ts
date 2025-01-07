@@ -12,7 +12,7 @@ export const load: PageServerLoad = async (event) => {
   const lastEntries = await prisma.entry.findMany({
     where: { userId: session?.user?.id },
     orderBy: { createdAt: 'desc' },
-    take: 4,
+    take: 2,
   })
 
   if (!writtenTodayCheck && params.get('later') !== 'true') {
