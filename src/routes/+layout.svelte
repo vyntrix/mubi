@@ -1,6 +1,8 @@
 <script lang="ts">
+    import '../main.css'
   import 'uno.css'
   import '@unocss/reset/tailwind.css'
+
   import Header from '$lib/components/header.svelte';
   import Footer from '$lib/components/footer.svelte';
 

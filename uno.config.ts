@@ -33,7 +33,7 @@ export default defineConfig({
     presetWebFonts({
       provider: 'fontsource',
       fonts: {
-        sans: 'Pretendard:300;400;500;600;700;800;900',
+        sans: 'Roboto:300;400;500;600;700;800;900',
       },
     }),
     presetTypography(),
