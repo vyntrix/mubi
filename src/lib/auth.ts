@@ -4,7 +4,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { SvelteKitAuth } from '@auth/sveltekit'
 import Discord from '@auth/sveltekit/providers/discord'
 import Google from '@auth/sveltekit/providers/google'
-import Nodemailer from '@auth/sveltekit/providers/nodemailer'
+import EmailProvider from '@auth/sveltekit/providers/nodemailer'
 import { createTransport } from 'nodemailer'
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
@@ -24,19 +24,19 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     verifyRequest: '/verify',
   },
   providers: [
-    Nodemailer({
+    EmailProvider({
+      from: env.EMAIL_FROM,
       server: {
-        host: env.SMTP_HOST,
+        host: env.EMAIL_SERVER_HOST,
         // TODO: fix this any type
-        port: env.SMTP_PORT as any,
+        port: env.EMAIL_SERVER_PORT as any,
         auth: {
-          user: env.SMTP_USER,
-          pass: env.SMTP_PASSWORD,
+          user: env.EMAIL_SERVER_USER,
+          pass: env.EMAIL_SERVER_PASSWORD,
         },
       },
-      from: env.EMAIL_FROM,
       async sendVerificationRequest(params) {
-        const { identifier, url, provider, theme } = params
+        const { identifier, url, provider } = params
         const { host } = new URL(url)
 
         const transport = createTransport(provider.server)
