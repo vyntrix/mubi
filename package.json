@@ -26,7 +26,7 @@
     "@antfu/eslint-config": "^3.12.1",
     "@iconify-json/mingcute": "^1.2.3",
     "@sveltejs/adapter-node": "^5.2.9",
-    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/kit": "^2.20.6",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@types/nodemailer": "^6.4.17",
     "@unocss/eslint-plugin": "^0.65.2",
