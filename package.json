@@ -5,6 +5,7 @@
   "private": true,
   "author": "vyntrix",
   "license": "MIT",
+  "engines": { "node": "20" },
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",

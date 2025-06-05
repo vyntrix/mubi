@@ -7,7 +7,7 @@
   async function send_email(event: SubmitEvent) {
     event.preventDefault()
     loading = true
-    await signIn('nodemailer', { email, redirect: false })
+    await signIn('nodemailer', { email, redirect: true })
     loading = false
   }
 </script>
